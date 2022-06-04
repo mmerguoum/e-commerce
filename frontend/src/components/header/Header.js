@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 
 
@@ -20,8 +21,8 @@ const Header = () => {
                 lorem ipsumlorem ipsumlorem ipsumlorem ipsum
               </p>
               <button type="submit" className=" px-6 py-2 border-2 border-yellow-500 text-black font-medium text-xs leading-tight uppercase rounded hover:bg-yellow-700 hover:text-white  focus:outline-none focus:ring-0 transition duration-150 ease-in-out ml-28">
-              Shop Now
-            </button>
+              <Link to="/products">Shop Now</Link>                    
+              </button>
             </article>
       <article className="img-container">
         <img src={require('../../assets/tab3.jpg')} className="main-img"/>
