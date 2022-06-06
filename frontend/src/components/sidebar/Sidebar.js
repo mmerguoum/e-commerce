@@ -2,9 +2,9 @@ import React from 'react'
 
 const Sidebar = () => {
   return (
-<div className="flex flex-row min-h-screen  text-gray-900">
+<div className="flex flex-row h-max text-gray-900 fixed bg-white">
     <aside
-      className="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in "
+      className="sidebar w-64 md:shadow transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in"
     >
     <div className="flex justify-center mt-8">
                      <div className="mb-3 xl:w-96">
