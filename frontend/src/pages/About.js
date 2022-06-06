@@ -3,8 +3,8 @@ import React from 'react'
 const About = () => {
   return (
 
-<div className=" h-max w-full flex justify-center items-center rounded p-12">
-  <div className="grid md:grid-cols-2 grid-cols-1 shadow-2xl bg-white xl:w-4/5 md:w-full md:h-4/5 h-full w-96 text-center text-sm rounded-sm overflow-hidden">
+<div className=" h-max w-full flex justify-center items-center rounded p-12 ">
+  <div className="grid md:grid-cols-2 grid-cols-1 shadow-2xl bg-white xl:w-4/5 md:w-full md:h-4/5 h-full w-96 text-center text-sm rounded-sm overflow-hidden rounded-xl">
     <img className="h-full" src={require('../assets/aboutTof.jpg')}/>
 
     <div className="bg-my-color text-white w-full h-screen flex justify-center items-center px-3 text-center">
