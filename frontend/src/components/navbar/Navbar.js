@@ -5,10 +5,10 @@ const Header = () => {
   return (
 <nav className="bg-white border-gray-200 p-8 sm:px-4 py-2.5 rounded">
   <div className="container flex flex-wrap justify-between items-center mx-auto">
-  <a href="https://flowbite.com" className="flex items-center">
+  <Link to="/" className="flex items-center">
   <img src={require("../../assets/logo.png")} className="mr-10 h-16 w-32 " alt="Flowbite Logo"/>
   
-  </a>
+  </Link>
   <div className="flex md:order-2">
     <button type="button" className=" mr-10 block py-2 pr-4 pl-3 bg-gray-700 rounded md:bg-transparent md:text-yellow-600 md:p-0 dark:text-yellow-600">
       <Link to="Login">Login</Link></button>
