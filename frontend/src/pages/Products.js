@@ -1,8 +1,11 @@
 import React from 'react'
+import Sidebar from '../components/sidebar/Sidebar'
 
 const Products = () => {
   return (
-    <div>Products</div>
+    <div className="h-screen">
+      <Sidebar/>
+    </div>
   )
 }
 

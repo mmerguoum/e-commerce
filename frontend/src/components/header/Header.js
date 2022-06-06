@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const Header = () => {
   return (
     <Wrapper className="section-center">
-      <article className="content inline-block">
+      <article className="content inline-block ">
               <h1>
                 Get your taste of <br />
                 Artshop
@@ -71,6 +71,7 @@ const Wrapper = styled.section`
     gap: 8rem;
     h1 {
       margin-bottom: 2rem;
+      
     }
     p {
       font-size: 1.25rem;
