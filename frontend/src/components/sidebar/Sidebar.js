@@ -42,22 +42,22 @@ const Sidebar = () => {
           <li className="my-px">
             <a
               href="#"
-              className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-              <span className="ml-3 text-gray-700">All</span>
+              className="flex flex-row items-center h-8 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
+              <span className="ml-3 text-gray-700 text-xs">All</span>
             </a>
           </li>
           <li className="my-px">
             <a
               href="#"
-              className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-              <span className="ml-3 text-gray-700">Abstract Acrylic Painting</span>
+              className="flex flex-row items-center h-8 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
+              <span className="ml-3 text-gray-700 text-xs">Abstract Acrylic Painting</span>
             </a>
           </li>
           <li className="my-px">
             <a
               href="#"
-              className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-              <span className="ml-3 text-gray-700">Fluid Acrylic Paint</span>s
+              className="flex flex-row items-center h-8 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
+              <span className="ml-3 text-gray-700 text-xs">Fluid Acrylic Paint</span>
             </a>
           </li>
           <li className="my-px">
@@ -66,30 +66,30 @@ const Sidebar = () => {
           <li className="my-px">
             <a
               href="#"
-              className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-              <span className="ml-3 text-gray-700">Standard</span>
+              className="flex flex-row items-center h-8 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
+              <span className="ml-3 text-gray-700 text-xs">Standard</span>
             </a>
           </li>
           <li className="my-px">
             <a
               href="#"
-              className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-              <span className="ml-3 text-gray-700">Diptych</span>
+              className="flex flex-row items-center h-8 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
+              <span className="ml-3 text-gray-700 text-xs">Diptych</span>
             </a>
           </li>
           <li className="my-px">
             <a
               href="#"
-              className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
-              <span className="ml-3 text-gray-700">Triptych</span>
+              className="flex flex-row items-center h-8 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700">
+              <span className="ml-3 text-gray-700 text-xs">Triptych</span>
             </a>
           </li>
           <li className="my-px">
             <a
               href="#"
-              className="flex flex-row items-center h-10 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
+              className="flex flex-row items-center h-8 px-3 rounded-lg text-gray-300 hover:bg-gray-100 hover:text-gray-700"
             >
-              <span className="ml-3 text-gray-700">quadruple</span>
+              <span className="ml-3 text-gray-700 text-xs">quadruple</span>
             </a>
           </li>
         </ul>
