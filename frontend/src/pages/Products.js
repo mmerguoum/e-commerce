@@ -3,11 +3,8 @@ import Sidebar from '../components/sidebar/Sidebar'
 
 const Products = () => {
   return (
-  <div className="">
     <div className="h-screen overflow-x-auto">
-      <Sidebar/>
-    <div/>
-    
+      <Sidebar/>   
     <section class="text-gray-600 body-font bloc">
             <div class="container px-5 py-24 mx-auto">
               <div class="flex flex-wrap -m-4">
@@ -57,7 +54,7 @@ const Products = () => {
             </div>
          </section>
       </div>
-    </div>
+
   )
 }
 
