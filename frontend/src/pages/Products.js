@@ -4,7 +4,10 @@ import Sidebar from '../components/sidebar/Sidebar'
 const Products = () => {
   return (
     <div className="h-screen">
-      <Sidebar/>
+
+      <Sidebar />
+
+    
     </div>
   )
 }
