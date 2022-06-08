@@ -5,9 +5,10 @@ import Footer from './components/footer/Footer';
 import Home from './pages/Home';
 import Products from './pages/products/Products';
 import About from './pages/About';
-import Login from './pages/Login';
+import Login from './pages/signin/Login';
+import Signup from './pages/signup/Signup';
 import Cart from './pages/Cart';
-import Signup from './pages/Signup';
+
 
 
 const App = () => {

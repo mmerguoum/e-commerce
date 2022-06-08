@@ -5,21 +5,14 @@ const mongoose  = require("mongoose");
 const RoleSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    enum: ["admin", "client", "livreur"],
-    default: "livreur"
+    enum: ["admin", "user"],
+    default: "user"
   }
 })
 
 // create Users schema
 const userschema = new mongoose.Schema({
-  username:{
-    type: String,
-    required: true,
-    min: 6,
-    max:255
-  },
-  fullname:{
+  fullName:{
     type: String,
     required: true,
     min: 6,
@@ -31,22 +24,19 @@ const userschema = new mongoose.Schema({
     min: 6,
     max:255
   },
+  phone:{
+    type:Number,
+    required:true,
+  },
+  adress:{
+    type:String,
+    required: false
+  },
   password: {
     type: String,
     required: true,
     max:1024,
     min:6
-  },
-  phone:{
-    type:Number,
-    required:true,
-  },
-  image:{
-    type:Buffer
-  },
-  adress:{
-    type:String,
-    required: false
   },
   date:{
     type:Date,

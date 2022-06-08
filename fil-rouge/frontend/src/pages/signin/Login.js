@@ -1,16 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 
 
 const Login = () => {
+
+    const [data, setData] = useState({
+        email : "",
+        password: ""
+    });
+    const [submit, setSubmit] = useState(false)
+    
+    const navigate = useNavigate()
+
+    const handleEmail = (e) => {
+        setData({ ...data,email: e.target.value })
+    }
+
+
   return (
 
 <div className="container mx-auto ">
     <div className="flex justify-center px-6 my-12">
         <div className="w-full xl:w-3/4 lg:w-11/12 flex">
             <div className="w-full h-auto bg-yellow-600 hidden bg-blend-darken lg:block lg:w-5/12 bg-cover rounded-l-lg">
-                <img className="h-full" src={require('../assets/Login.webp')}/>
+                <img className="h-full" src={require('../../assets/Login.webp')}/>
             </div>
 
             <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">

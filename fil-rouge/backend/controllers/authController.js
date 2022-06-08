@@ -23,13 +23,12 @@ const hashedpassword = await bcrypt.hash(req.body.password, salt);
 
 // Create a new user
   const user = new Users({
-    username: req.body.username,
-    fullname: req.body.fullname,
+    fullName: req.body.fullName,
     email: req.body.email,
     phone: req.body.phone,
     adress: req.body.adress,
     password: hashedpassword,
-    repaeat_password: req.body.repaeat_password,
+    confirm_password: req.body.repaeat_password,
     role: {name:req.body.role}
   });
   try{
@@ -61,7 +60,11 @@ if(!validPass) return res.status(400).send("Invalid Password");
 
 //create and assign a token
 const token = jwt.sign({_id: user._id},process.env.TOKEN_SECRET)
-res.header('auth-token', token).send(token);
+const { _id, fullName, email, role } = user;
+res.status(200).json({
+  token,
+  user: { _id, fullName, email, role},
+});
   
 }
 

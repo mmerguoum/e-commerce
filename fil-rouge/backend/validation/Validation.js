@@ -4,13 +4,13 @@ const joi = require('joi');
 
 const registerValidation = (data) => {
   const schema = joi.object().keys({
-    username: joi.string().alphanum().min(3).max(30).required(),
-    fullname: joi.string().alphanum().min(3).max(30).required(),
-    role: joi.string().alphanum().min(3).max(30).required(),
+    fullName: joi.string().min(3).max(30).required(),
+    email: joi.string().email({ minDomainSegments: 2 }),   
     phone: joi.number().integer(),
     adress: joi.string().min(3).max(30),
     password: joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
-    email: joi.string().email({ minDomainSegments: 2 })
+    role: joi.string().alphanum().min(3).max(30),
+    
   })
   return schema.validate(data);
 }
