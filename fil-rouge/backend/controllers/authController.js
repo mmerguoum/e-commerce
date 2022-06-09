@@ -59,7 +59,7 @@ const validPass = await bcrypt.compare(req.body.password, user.password);
 if(!validPass) return res.status(400).send("Invalid Password");
 
 //create and assign a token
-const token = jwt.sign({_id: user._id},process.env.TOKEN_SECRET)
+const token = jwt.sign({_id: user._id,role:user.role},process.env.TOKEN_SECRET)
 const { _id, fullName, email, role } = user;
 res.status(200).json({
   token,

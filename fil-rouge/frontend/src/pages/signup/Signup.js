@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router'
 
 
 const Signup = () => {
+
+  
 const[fullName, setFullName] = useState('')
 const[email, setEmail] = useState('')
 const[phone, setPhone] = useState('')

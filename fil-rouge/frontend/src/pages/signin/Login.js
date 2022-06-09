@@ -1,22 +1,53 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router'
-
+import {Link } from 'react-router-dom'
+import {useNavigate } from 'react-router'
+import {useDispatch } from 'react-redux'
+import jwtDecode from 'jwt-decode'
+import {loginAction, setRoleAction, setIdAction } from '../../actions/authActions';
+import axios from 'axios'
 
 
 const Login = () => {
+
+    const [submit, setSubmit] = useState(false)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const [data, setData] = useState({
         email : "",
         password: ""
     });
-    const [submit, setSubmit] = useState(false)
     
-    const navigate = useNavigate()
+    
 
     const handleEmail = (e) => {
         setData({ ...data,email: e.target.value })
     }
+
+    const handlePassword = (e) => {
+        setData({ ...data, password: e.target.value })
+    }
+
+    const login =(email, password)=> {
+        return axios.post(`http://localhost:2000/api/users/login`, {
+          email: email,
+          password: password,
+        });
+      }
+
+    const handleSubmit = () => {
+        login(data.email, data.password).then((response) => {
+        (async () => {
+            await dispatch(loginAction());
+            await dispatch(setRoleAction(jwtDecode(response.data.token).role.name))
+            await dispatch(setIdAction(jwtDecode(response.data.token)._id))
+        })()
+      })
+      setSubmit(true);
+      navigate('/')
+    }
+
+
 
 
   return (
@@ -30,7 +61,10 @@ const Login = () => {
 
             <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
                 <h3 className="pt-4 text-2xl text-center">Create an Account!</h3>
-                <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}>
                     <div className="mb-4 md:flex md:justify-between"></div>
                     <div className="mb-4">
                         <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="email">
@@ -41,8 +75,8 @@ const Login = () => {
                             id="email"
                             type="email"
                             placeholder="Email"
-                            // email={data.email}
-                            // onChange={handleEmail}
+                            email={data.email}
+                            onChange={handleEmail}
                         />
                     </div>
             <div className="mb-4 md:flex md:justify-between">
@@ -55,8 +89,8 @@ const Login = () => {
                     id="password"
                     type="password"
                     placeholder="******************"
-                    // password={data.password}
-                    // onChange={handlePassword}
+                    password={data.password}
+                    onChange={handlePassword}
                     />
                     <p className="text-xs italic text-red-500">Please choose a password.</p>
                 </div>
@@ -65,7 +99,7 @@ const Login = () => {
                 <button
                     className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                     type="submit"
-                    // onClick={login}
+                    onClick={login}
                     >
                     login Account
                 </button>

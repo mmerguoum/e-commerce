@@ -1,8 +1,10 @@
 import React from 'react'
+import Layout from '../layout/Layout'
+
 
 const About = () => {
   return (
-
+<Layout>
 <div className=" h-max w-full flex justify-center items-center rounded p-12 ">
   <div className="grid md:grid-cols-2 grid-cols-1 shadow-2xl bg-white xl:w-4/5 md:w-full md:h-4/5 h-full w-96 text-center text-sm rounded-sm overflow-hidden rounded-xl">
     <img className="h-full" src={require('../assets/aboutTof.jpg')}/>
@@ -27,7 +29,7 @@ const About = () => {
     </div>
   </div>
 </div>
-
+</Layout>
 
   )
 }
