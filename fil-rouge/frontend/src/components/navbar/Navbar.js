@@ -12,9 +12,9 @@ const Header = () => {
         </Link>
       <div className="flex md:order-2">
           <button type="button" className=" mr-10 block py-2 pr-4 pl-3 bg-gray-700 rounded md:bg-transparent md:text-yellow-600 md:p-0 dark:text-yellow-600">
-            <Link to="Cart"><i className="fas fa-shopping-cart mr-1"></i>Cart</Link></button>
+            <Link to="/Cart"><i className="fas fa-shopping-cart mr-1"></i>Cart</Link></button>
           <button type="button" className=" mr-10 block py-2 pr-4 pl-3 bg-gray-700 rounded md:bg-transparent md:text-yellow-600 md:p-0 dark:text-yellow-600">
-            <Link to="Login"><i className="fas fa-user mr-1"></i>Login</Link></button>
+            <Link to="/Login"><i className="fas fa-user mr-1"></i>Login</Link></button>
         
       </div>
         <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-4">

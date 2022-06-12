@@ -7,6 +7,11 @@ const __PORT__ = process.env.PORT || 5000;
 
 app.use(cors())
 
+// import Routes
+const authRoute = require('./routes/auth')
+const categoryRoute = require('./routes/categories') 
+const userRoute = require('./routes/user')
+
 /**
  * Connecting DB
  */
@@ -22,8 +27,11 @@ app.get('/',(req,res) => {
 /**
  * define routes
  */
-app.use('/api/users',require('./routes/users'));
-// app.use('/api/auth',require('./routes/api/auth'));
+app.use('/api/users', authRoute);
+app.use('/api/category', categoryRoute)
+app.use('/api/profile', userRoute)
+
+
 
 
 app.listen(__PORT__,() => {

@@ -4,14 +4,12 @@ const commandeSchema = mongoose.Schema({
     id_cmd : {
         type : String
     },
-    date_cmd : {
-        type : Date,
-        default: Date.now
-    },
     mdePaiment: {
         type : String
     }
 
+},{
+    timestamps: true
 })
 
 module.exports = mongoose.model('commandes',

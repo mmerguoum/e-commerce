@@ -38,12 +38,17 @@ const userschema = new mongoose.Schema({
     max:1024,
     min:6
   },
-  date:{
-    type:Date,
-    default:Date.now
+  history: {
+    type: Array,
+    default: []
   },
-  role: RoleSchema,
-});
+  role: RoleSchema
 
-module.exports = mongoose.model('Users',
+}, {
+  timestamps: true
+})
+
+
+
+module.exports = mongoose.model('User',
 userschema);
