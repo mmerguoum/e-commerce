@@ -9,7 +9,7 @@ const createCategory = (req, res) => {
                 error : 'Bad Request ...!'
             })
         }
-        res.jon({
+        res.json({
             category : category
         })
     })

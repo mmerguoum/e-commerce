@@ -11,6 +11,7 @@ app.use(cors())
 const authRoute = require('./routes/auth')
 const categoryRoute = require('./routes/categories') 
 const userRoute = require('./routes/user')
+const productRoute = require('./routes/product')
 
 /**
  * Connecting DB
@@ -30,6 +31,7 @@ app.get('/',(req,res) => {
 app.use('/api/users', authRoute);
 app.use('/api/category', categoryRoute)
 app.use('/api/profile', userRoute)
+app.use('/api/product', productRoute)
 
 
 
