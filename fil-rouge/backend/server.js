@@ -1,43 +1,63 @@
-const express = require('express');
-require('dotenv').config();
-const connectDB = require('./config/db');
+const express = require('express')
+const dotenv = require('dotenv')
+const morgan = require('morgan')
+const connectDB = require('./config/db.js')
+const fileUpload = require('express-fileupload');
+const cookieParser = require('cookie-parser');
 const cors = require('cors')
-const app = express();
-const __PORT__ = process.env.PORT || 5000;
 
-app.use(cors())
+dotenv.config()
 
-// import Routes
+
 const authRoute = require('./routes/auth')
 const categoryRoute = require('./routes/categories') 
 const userRoute = require('./routes/user')
 const productRoute = require('./routes/product')
 
-/**
- * Connecting DB
- */
-connectDB();
-/**
- * Init middleware
- */
-app.use(express.json({extended:false}));
-app.get('/',(req,res) => {
 
-       res.send(`API Runing welcome ${process.env.APP_NAME}`);
-})
-/**
- * define routes
- */
+// /**
+//  * Connecting DB
+//  */
+connectDB()
+
+const app = express()
+app.use(cors());
+app.use(cookieParser());
+app.use(fileUpload({
+    useTempFiles: true,
+}));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
+
+app.use(express.json())
+
+// /**
+//  * define routes
+//  */
 app.use('/api/users', authRoute);
 app.use('/api/category', categoryRoute)
 app.use('/api/profile', userRoute)
 app.use('/api/product', productRoute)
 
 
+// app.get('/api/config/paypal', (req, res) =>
+//   res.send(process.env.PAYPAL_CLIENT_ID)
+// )
 
 
-app.listen(__PORT__,() => {
 
-      console.log( `Server Started on ${__PORT__} welcome ${process.env.NAME}
+
+
+const PORT = process.env.PORT || 5000
+
+
+
+app.listen(PORT,() => {
+
+      console.log( `Server Started on ${PORT} welcome ${process.env.NAME}
       `);
 });
+
+
