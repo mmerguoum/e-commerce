@@ -2,8 +2,9 @@ const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const connectDB = require('./config/db.js')
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser') //? The will let us get data the data form post
 const cors = require('cors')
 
 dotenv.config()
@@ -23,9 +24,8 @@ connectDB()
 const app = express()
 app.use(cors());
 app.use(cookieParser());
-app.use(fileUpload({
-    useTempFiles: true,
-}));
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))

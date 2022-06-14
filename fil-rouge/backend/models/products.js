@@ -21,12 +21,11 @@ const productSchema = new mongoose.Schema({
         type: Number
     },
     image: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        require: true
     },
     category: {
         type: String,
-        // ref: 'Category',
         require: true
     },
     shipping: {

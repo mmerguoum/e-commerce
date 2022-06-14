@@ -1,26 +1,50 @@
 const Product = require('../models/products')
-const asyncHandler = require('express-async-handler')
+const fs = require('fs')
 
 
-exports.createProduct =  async(req, res) => {
-        try{
-        const newProduct = await Product.create({
-          name: req.body.name,
-          image:req.body.image,
-          category: req.body.category,
-          price: req.body.price,
-          quantity: req.body.quantity,
-          description: req.body.description
-      });
+// exports.createProduct =  async(req, res) => {
+//         try{
+//         const newProduct = await Product.create({
+//           name: req.body.name,
+//           image:req.body.image,
+//           category: req.body.category, 
+//           price: req.body.price,
+//           quantity: req.body.quantity,
+//           description: req.body.description
+//       });
       
-      res.status(201).json({
-        newProduct : newProduct
+//       res.status(201).json({
+//         newProduct : newProduct
+//       });
+//       }catch (error) {
+//       res.status(400).send(error);
+//       console.log(error);
+//       }
+//       }
+
+exports.createProduct = async (req, res) => {
+  let image = './upload/' + Math.floor(Math.random() * 1000000000000000) + '.png';
+  await fs.promises.writeFile(image, req.files.image[0].buffer)
+  let data = req.body;
+
+  const name = data.name
+  const description = data.description
+  const price = data.price
+  const imageProduct = image
+  const category = data.category
+  const quantity = data.quantity
+
+  Product.create({
+      name: name, description: description, price: price, image: imageProduct, category: category, quantity: quantity
+  })
+      .then((product) => {
+
+          res.json(product)
+      })
+      .catch((err) => {
+          res.send({ status: 400, message: err });
       });
-      }catch (error) {
-      res.status(400).send(error);
-      console.log(error);
-      }
-      }
+};
 
 
 exports.showOneProduct = async(req, res) => {
@@ -31,6 +55,19 @@ exports.showOneProduct = async(req, res) => {
         res.status(404).send({message: 'Product Not Persist'})
     }
 }
+
+
+exports.getAllProducts = async (req, res) => {
+  const products = await Product.find()
+
+  try{
+    res.json(products)
+  }catch(error){
+    res.status(500).send(error)
+  }
+}
+
+
 
 exports.removeProduct = async(req, res) => {
     try {
@@ -44,68 +81,40 @@ exports.removeProduct = async(req, res) => {
 }
 
 
-
-
-// exports.putProduct = async(req, res) => {
-//     console.log('body' , req.body);
-//     const {name, category, price, quantity, description,image} = req.body
-//     const product = await Product.findByIdAndUpdate({_id:req.params.productId}, {
-//         name: name,
-//         category: category,
-//         price: price,
-//         quantity: quantity,
-//         description: description,
-//         image:image
-//     }, {new: true})
-//     if(product) {
-//         res.send(product)
-//     }
-//     else{
-//         res.status(404).send({message: 'Product Not Persist'})
-//     }
-// }
-// exports.putProduct = async(req, res) =>{
-// try {
-//   const {name, price, description, image, category, quantity} = req.body;
-//   if(!images) return res.status(400).json({msg: "No image upload"})
-
-//   await Products.findOneAndUpdate({_id: req.params.id}, {
-//       name, price, description, image, category, quantity
-//   })
-
-//   res.json({msg: "Updated a Product"})
-// } catch (err) {
-//   return res.status(500).json({msg: err.message})
-// }
-// }
-exports.putProduct = asyncHandler(async (req, res) => {
-    const {
-      name,
-      price,
-      description,
-      image,
-      category,
-      quantity,
-    } = req.body
+exports.searchProduct = async(req, res)=>{
+  let data = await Product.find(
+    {
+        "$or":[
+            {name:{$regex:req.params.key}},
+        ]
+      }
+)
   
-    const product = await Product.findById(req.params.productId)
-    // console.log(req.params.productId)
-    if (product) {
-      product.name = name
-      product.price = price
-      product.description = description
-      product.image = image
-      product.quantity = quantity
-      product.category = category
-     
-  
-      const updateProduct = await product.save()
-      res.json(updateProduct)
-    } else {
-      res.status(404)
-      throw new Error('Product not found')
-    }
+    res.send(data)
+}
+
+
+exports.putProduct = async (req, res) => {
+  let data = req.body;
+  const updateProduct = await Product.update({
+          name: data.name,
+          decsription: data.decsription,
+          price: data.price,
+          imageProduct: data.image,
+          category: data.category,
+          quantity: data.quantity
+
+      }, {
+      where: { id: req.params.productId }
   })
+      .then((updateProduct) => {
+          res.json({ status: 200, updateProduct });
+      })
+      .catch((err) => {
+          res.send({ status: 400, message: err });
+      });
+};
+  
 
   exports.searchMeal = async(req,res)=>{
     let regEx = new RegExp(req.query.name,'i');
