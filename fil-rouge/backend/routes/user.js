@@ -1,13 +1,17 @@
 const express = require('express')
-const { getOneUser } = require('../controllers/userController')
-const { userById } = require('../middleware/user')
+const { showOneUser } = require('../controllers/userController')
 
 
 
 const router = express.Router()
 
-router.get('/:userId', getOneUser)
-router.param('userId', userById)
+router.get('/:userId', showOneUser)
+router.get('/getAll', getAllUsers)
+router.get('/:userId', showOneUser) 
+router.delete('/:userId', removeUser)
+router.put('/:userId', updateUser)
+router.get('/search/:key', searchUser)
+
 
 
 module.exports = router;
