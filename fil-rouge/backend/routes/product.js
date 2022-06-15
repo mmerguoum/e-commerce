@@ -3,7 +3,7 @@ const {
      createProduct,
     showOneProduct, 
     removeProduct, 
-    putProduct, 
+    updateProduct, 
     getAllProducts,
     searchProduct } = require('../controllers/productController') 
     const multer = require('multer')
@@ -17,7 +17,7 @@ router.post('/create', upload.fields([{ name: 'image', maxCount: 1 }]), createPr
 router.get('/getAll', getAllProducts)
 router.get('/:productId', showOneProduct) 
 router.delete('/:productId', removeProduct)
-router.put('/:productId', putProduct)
+router.put('/:productId', updateProduct)
 router.get('/search/:key', searchProduct)
 // router.put('/:productIduserId', putProduct)
 

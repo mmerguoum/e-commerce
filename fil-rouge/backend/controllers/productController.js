@@ -2,26 +2,6 @@ const Product = require('../models/products')
 const fs = require('fs')
 
 
-// exports.createProduct =  async(req, res) => {
-//         try{
-//         const newProduct = await Product.create({
-//           name: req.body.name,
-//           image:req.body.image,
-//           category: req.body.category, 
-//           price: req.body.price,
-//           quantity: req.body.quantity,
-//           description: req.body.description
-//       });
-      
-//       res.status(201).json({
-//         newProduct : newProduct
-//       });
-//       }catch (error) {
-//       res.status(400).send(error);
-//       console.log(error);
-//       }
-//       }
-
 exports.createProduct = async (req, res) => {
   let image = './upload/' + Math.floor(Math.random() * 1000000000000000) + '.png';
   await fs.promises.writeFile(image, req.files.image[0].buffer)
@@ -93,28 +73,49 @@ exports.searchProduct = async(req, res)=>{
     res.send(data)
 }
 
-
-exports.putProduct = async (req, res) => {
+exports.updateProduct = async (req, res) => {
   let data = req.body;
-  const updateProduct = await Product.update({
+  const productUpdate = await Product.findByIdAndUpdate(
+      {
           name: data.name,
           decsription: data.decsription,
           price: data.price,
           imageProduct: data.image,
-          category: data.category,
-          quantity: data.quantity
+          quantity: data.quantity,
+          category: data.category
 
       }, {
-      where: { id: req.params.productId }
+      where: { _id: req.params.productId }
   })
-      .then((updateProduct) => {
-          res.json({ status: 200, updateProduct });
-      })
-      .catch((err) => {
-          res.send({ status: 400, message: err });
-      });
-};
-  
+  try{
+    res.json(productUpdate)
+  }catch(error){
+    res.status(500).send(error)
+  }
+}
+
+//   exports.putProduct = async(req, res) =>{
+//     try {
+//         const {productId, name, price, description, content, image, category} = req.body;
+//         if(!image) return res.status(400).json({msg: "No image upload"})
+
+//         const product = await Product.findOne({productId})
+//         if(product)
+//             return res.status(400).json({msg: "This product already exists."})
+
+//         const newProduct = new Products({
+//             productId, name, price, description, content, image, category
+//         })
+
+//         await newProduct.save()
+//         res.json({msg: "Created a product"})
+
+//     } catch (err) {
+//         return res.status(500).json({msg: err.message})
+//     }
+// }
+
+
 
   exports.searchMeal = async(req,res)=>{
     let regEx = new RegExp(req.query.name,'i');

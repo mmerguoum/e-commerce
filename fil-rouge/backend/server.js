@@ -2,7 +2,6 @@ const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const connectDB = require('./config/db.js')
-// const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser') //? The will let us get data the data form post
 const cors = require('cors')
@@ -22,16 +21,19 @@ const productRoute = require('./routes/product')
 connectDB()
 
 const app = express()
-app.use(cors());
-app.use(cookieParser());
+
+//* the will let us get data the data form post
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+app.use(cors());
+app.use(cookieParser());
+
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
-app.use(express.json())
 
 // /**
 //  * define routes
