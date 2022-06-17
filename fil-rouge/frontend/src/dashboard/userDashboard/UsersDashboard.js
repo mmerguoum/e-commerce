@@ -1,7 +1,42 @@
-import React from 'react'
-import AdminDashboard from './AdminDashboard';
+import React, { useState, useEffect } from 'react'
+import AdminDashboard from '../adminDashbord/AdminDashboard';
+import MapGetAllUsers from '../userDashboard/MapGetAllUser';
+import axios from 'axios'
+
 
 const UsersDashboard = () => {
+const [users, setUsers] = useState([])
+
+const handleDelete = async (e,selectionId) => {
+    console.log(selectionId)
+    await axios.delete(`http://localhost:2000/api/users/${selectionId}`)
+    .then(res => {
+        const deleteUser = users.filter(e => e._id !== selectionId)
+        setUsers(deleteUser)
+    })
+}
+
+const url = "http://localhost:2000/api/users/getUser"
+
+
+    useEffect(() => {
+        getAllUsers()
+    },[])
+
+    const getAllUsers = () => {
+        axios.get(url).then((response) => {
+            const allUsers = response.data
+            console.log(allUsers)
+            setUsers(allUsers)
+        })
+    }
+
+    // const [userById, setUserById] = useState([])
+    const [id, setId] = useState()
+
+    const handleId = (e, selectionId) => {
+        setId(selectionId)
+    }
   return (
     <div>
         <AdminDashboard/>
@@ -35,27 +70,7 @@ const UsersDashboard = () => {
                         </th>
                     </tr>
                 </thead>
-            <tbody>
-                <tr className="dark:text-gray-700 border-b dark:bg-gray-50 ">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-gray-700 whitespace-nowrap">
-                    Pro 17"
-                    </th>
-                    <td className="px-6 py-4">
-                    Sliver
-                    </td>
-                    <td className="px-6 py-4">
-                    Laptop
-                    </td>
-                    <td className="px-6 py-4">
-                    $2999
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 mr-8 hover:underline">Edit</a>
-                    <a href="#" className="font-medium text-blue-600 dark:text-red-500  hover:underline">Delete</a>
-                    </td>
-                </tr>
-                   
-            </tbody>
+                <MapGetAllUsers handleId = {handleId} getAllUsers={users} handleDelete={handleDelete}/>
             </table>
         </div>
 

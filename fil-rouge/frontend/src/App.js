@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import {  BrowserRouter as Router,Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Products from './pages/products/Products';
@@ -6,9 +6,12 @@ import About from './pages/About';
 import Login from './pages/signin/Login';
 import Signup from './pages/signup/Signup';
 import Cart from './pages/Cart';
-import AdminDashboard from './components/dashboard/AdminDashboard'
-import UsersDashboard from './components/dashboard/UsersDashboard';
-import ProductDashboard from './components/dashboard/ProductDashboard';
+import AdminDashboard from '../src/dashboard/adminDashbord/AdminDashboard'
+import UsersDashboard from '../src/dashboard/userDashboard/UsersDashboard';
+import ProductDashboard from '../src/dashboard/productDashboard/ProductDashboard';
+import CategoryDashboard from './dashboard/categoryDashboard/CategoryDashboard';
+import UpdateProducts from './dashboard/productDashboard/UpdateProducts';
+import UpdateUser from './dashboard/userDashboard/UpdateUser';
 
 
 
@@ -27,6 +30,9 @@ const App = () => {
           <Route path='AdminDashboard' element={<AdminDashboard/>}/>
           <Route path='UsersDashboard' element={<UsersDashboard/>}/>
           <Route path='ProductDashboard' element={<ProductDashboard/>}/>
+          <Route path='CategoryDashboard' element={<CategoryDashboard/>}/>
+          <Route path='UpdateUser/:id' element={<UpdateUser/>}/>
+          <Route path='UpdateProducts/:id' element={<UpdateProducts/>}/>
         </Routes>
       </Router>
   </>

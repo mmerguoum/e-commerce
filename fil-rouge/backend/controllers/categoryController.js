@@ -15,6 +15,17 @@ const createCategory = (req, res) => {
     })
 }
 
+const getAllCategories = async(req, res) => {
+    const categories = await Category.find({})
+
+    try{
+      res.json(categories)
+    }catch(error){
+      res.status(500).send(error)
+    }
+  }
+
+
 const removeCategory = async(req, res) => {
     try {
         const category = await Category.findByIdAndDelete(req.params.categoryId)
@@ -26,26 +37,9 @@ const removeCategory = async(req, res) => {
     }
 }
 
-const putCategory = async (req, res) => {
-    const {
-      name,
-    } = req.body
-  
-    const category = await Category.findById(req.params.categoryId)
-    // console.log(req.params.productId)
-    if (category) {
-      category.name = name
-      
-      const updateCategory = await category.save()
-      res.json(updateCategory)
-    } else {
-      res.status(404)
-      throw new Error('Product not found')
-    }
-  }
 
 module.exports = {
     createCategory,
     removeCategory,
-    putCategory,
+    getAllCategories
 }

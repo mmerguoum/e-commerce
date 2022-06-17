@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const connectDB = require('./config/db.js')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser') //? The will let us get data the data form post
+const fileUpload = require('express-fileupload')
 const cors = require('cors')
 
 dotenv.config()
@@ -13,6 +14,7 @@ const authRoute = require('./routes/auth')
 const categoryRoute = require('./routes/categories') 
 const userRoute = require('./routes/user')
 const productRoute = require('./routes/product')
+const upload =require('./routes/upload')
 
 
 // /**
@@ -28,6 +30,9 @@ app.use(bodyParser.json())
 
 app.use(cors());
 app.use(cookieParser());
+app.use(fileUpload({
+  useTempFiles: true,
+}));
 
 
 if (process.env.NODE_ENV === 'development') {
@@ -38,10 +43,11 @@ if (process.env.NODE_ENV === 'development') {
 // /**
 //  * define routes
 //  */
-app.use('/api/users', authRoute);
+app.use('/api/auth', authRoute);
 app.use('/api/category', categoryRoute)
-app.use('/api/profile', userRoute)
+app.use('/api/users', userRoute)
 app.use('/api/product', productRoute)
+app.use('/api',upload)
 
 
 // app.get('/api/config/paypal', (req, res) =>

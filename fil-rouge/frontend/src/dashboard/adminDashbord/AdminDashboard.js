@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import RowProduct from '../productDashboard/RowProduct'
+import RowUser from '../userDashboard/RowUser'
+import RowCategory from '../categoryDashboard/RowCategory'
 
 const AdminDashboard = () => {
+    const [products, setProducts]=useState(false)
+    const [users, setUsers]=useState(false)
+    const [categories, setCategory]=useState(false)
 
+  
   return (
     <div className = "fixed">
           <nav className="bg-white border-b border-yellow-200 fixed z-30 w-full fixed">
@@ -65,13 +71,24 @@ const AdminDashboard = () => {
                                <span className="ml-3 flex-1 whitespace-nowrap">Products</span>
                             </Link>
                          </li>
+                         <li>
+                            <Link to="/CategoryDashboard" className="text-base text-white font-normal rounded-lg hover:bg-yellow-700 flex items-center p-2 group ">
+                               <svg className="w-6 h-6 ml-4 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                  <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd"></path>
+                               </svg>
+                               <span className="ml-3 flex-1 whitespace-nowrap">Categories</span>
+                            </Link>
+                         </li>
                       </ul>
                    </div>
                 </div>
              </div>
           </aside>
           <div className="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
-          <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">   
+          <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"> 
+            {(products===true) && <RowProduct />}   
+            {(users===true) && <RowUser />}   
+            {(categories===true) && <RowCategory />}   
           </div>
        </div>
     </div>

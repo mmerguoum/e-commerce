@@ -3,19 +3,18 @@ const fs = require('fs')
 
 
 exports.createProduct = async (req, res) => {
-  let image = './upload/' + Math.floor(Math.random() * 1000000000000000) + '.png';
-  await fs.promises.writeFile(image, req.files.image[0].buffer)
+  
   let data = req.body;
 
   const name = data.name
   const description = data.description
   const price = data.price
-  const imageProduct = image
+  const image = data.image
   const category = data.category
   const quantity = data.quantity
 
   Product.create({
-      name: name, description: description, price: price, image: imageProduct, category: category, quantity: quantity
+      name: name, description: description, price: price, image: image, category: category, quantity: quantity
   })
       .then((product) => {
 
@@ -61,11 +60,11 @@ exports.removeProduct = async(req, res) => {
 }
 
 
-exports.searchProduct = async(req, res)=>{
+exports.productSearch = async(req, res)=>{
   let data = await Product.find(
     {
         "$or":[
-            {name:{$regex:req.params.key}},
+            {name:{$regex:req.params.key.toLowerCase()}},
         ]
       }
 )
@@ -73,57 +72,36 @@ exports.searchProduct = async(req, res)=>{
     res.send(data)
 }
 
-exports.updateProduct = async (req, res) => {
-  let data = req.body;
-  const productUpdate = await Product.findByIdAndUpdate(
-      {
-          name: data.name,
-          decsription: data.decsription,
-          price: data.price,
-          imageProduct: data.image,
-          quantity: data.quantity,
-          category: data.category
+exports.updateProduct = async(req, res) =>{
+  try {
+      const {name, price, description, quantity, image, category} = req.body;
+      if(!image) return res.status(400).json({msg: "No image upload"})
 
-      }, {
-      where: { _id: req.params.productId }
-  })
-  try{
-    res.json(productUpdate)
-  }catch(error){
-    res.status(500).send(error)
+      await Product.findOneAndUpdate({_id: req.params.productId}, {
+          name, price, description, quantity, image, category
+      })
+
+      res.json({msg: "Updated a Product"})
+  } catch (err) {
+      return res.status(500).json({msg: err.message})
   }
 }
 
-//   exports.putProduct = async(req, res) =>{
-//     try {
-//         const {productId, name, price, description, content, image, category} = req.body;
-//         if(!image) return res.status(400).json({msg: "No image upload"})
-
-//         const product = await Product.findOne({productId})
-//         if(product)
-//             return res.status(400).json({msg: "This product already exists."})
-
-//         const newProduct = new Products({
-//             productId, name, price, description, content, image, category
-//         })
-
-//         await newProduct.save()
-//         res.json({msg: "Created a product"})
-
-//     } catch (err) {
-//         return res.status(500).json({msg: err.message})
-//     }
-// }
 
 
+  // exports.productSearch = async(req,res)=>{
+  //   let regEx = new RegExp(req.query.name,'i');
+  //  const searchedProducts = await Product.find(
+  //   {
+  //     "$or":[
+  //         {name:{$regex:req.params.key}},
+  //     ]
+  //   }
+  // )
+  //  if(searchedProducts){
+  //      res.send(searchedProducts)
 
-  exports.searchMeal = async(req,res)=>{
-    let regEx = new RegExp(req.query.name,'i');
-   const serachedProducts = await Product.find({name:regEx})
-   if(serachedProducts){
-       res.send(serachedProducts)
-
-   }else{
-     res.status(402).send({message:'Opps No product found!!'})
-   }
-  }
+  //  }else{
+  //    res.status(402).send({message:'Opps No product found!!'})
+  //  }
+  // }

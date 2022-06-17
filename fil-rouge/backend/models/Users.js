@@ -1,4 +1,5 @@
 const mongoose  = require("mongoose");
+// console.log(mongoose.isValidObjectId())
 
 
 //create Role schema
@@ -12,6 +13,7 @@ const RoleSchema = new mongoose.Schema({
 
 // create Users schema
 const userschema = new mongoose.Schema({
+
   fullName:{
     type: String,
     required: true,
@@ -40,7 +42,7 @@ const userschema = new mongoose.Schema({
   },
   history: {
     type: Array,
-    default: []
+    default: [] 
   },
   role: RoleSchema
 
@@ -50,5 +52,4 @@ const userschema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('User',
-userschema);
+module.exports = mongoose.model('User', userschema);

@@ -5,7 +5,7 @@ const {
     removeProduct, 
     updateProduct, 
     getAllProducts,
-    searchProduct } = require('../controllers/productController') 
+    productSearch } = require('../controllers/productController') 
     const multer = require('multer')
     const upload = multer();
     
@@ -15,10 +15,10 @@ const router = express.Router()
 // ,Upload.single('image')
 router.post('/create', upload.fields([{ name: 'image', maxCount: 1 }]), createProduct)
 router.get('/getAll', getAllProducts)
-router.get('/:productId', showOneProduct) 
-router.delete('/:productId', removeProduct)
 router.put('/:productId', updateProduct)
-router.get('/search/:key', searchProduct)
+router.delete('/:productId', removeProduct)
+router.get('/:productId', showOneProduct) 
+router.get('/search/:key', productSearch)
 // router.put('/:productIduserId', putProduct)
 
 

@@ -55,7 +55,7 @@ const API_URL = 'http://localhost:2000/api/users/register'
   }
 
   return (
-  <div className="container mx-auto w-4/5 pb-12">
+  <div className="container mx-auto w-full pb-32">
     <div className="flex justify-center px-6 my-12">
       <div className="w-full xl:w-3/4 lg:w-11/12 flex">
        <div className="w-full h-auto bg-yellow-600 hidden bg-blend-darken lg:block lg:w-5/12 bg-cover rounded-l-lg">
