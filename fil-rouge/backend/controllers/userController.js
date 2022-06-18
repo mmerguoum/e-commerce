@@ -1,5 +1,29 @@
 const User = require('../models/users')
 
+
+exports.createUser = async (req, res) => {
+  
+    let data = req.body;
+  
+    const fullName = data.fullName
+    const email = data.email
+    const password = data.password
+    const phone = data.phone
+    const adress = data.adress
+ 
+  
+    User.create({
+        fullName: fullName, email: email, phone: phone, adress: adress, password: password
+    })
+        .then((user) => {
+  
+            res.json(user)
+        })
+        .catch((err) => {
+            res.send({ status: 400, message: err });
+        });
+  };
+
 exports.getAllUser = async(req, res) => {
     const users = await User.find()
 

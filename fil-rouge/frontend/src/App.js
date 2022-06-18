@@ -12,7 +12,8 @@ import ProductDashboard from '../src/dashboard/productDashboard/ProductDashboard
 import CategoryDashboard from './dashboard/categoryDashboard/CategoryDashboard';
 import UpdateProducts from './dashboard/productDashboard/UpdateProducts';
 import UpdateUser from './dashboard/userDashboard/UpdateUser';
-
+import AddProduct from './dashboard/productDashboard/AddProduct';
+import AddCategory from './dashboard/categoryDashboard/AddCategory';
 
 
 const App = () => {
@@ -33,6 +34,8 @@ const App = () => {
           <Route path='CategoryDashboard' element={<CategoryDashboard/>}/>
           <Route path='UpdateUser/:id' element={<UpdateUser/>}/>
           <Route path='UpdateProducts/:id' element={<UpdateProducts/>}/>
+          <Route path='AddProduct' element={<AddProduct/>}/>
+          <Route path='AddCategory' element={<AddCategory/>}/>
         </Routes>
       </Router>
   </>
