@@ -1,6 +1,6 @@
 const express = require('express')
 const {
-     createProduct,
+    createProduct,
     showOneProduct, 
     removeProduct, 
     updateProduct, 
@@ -10,10 +10,10 @@ const {
     const upload = multer();
     
 
-    // upload.fields([{ name: 'image', maxCount: 1 }]),
+
 const router = express.Router()
 // ,Upload.single('image')
-router.post('/create',  createProduct)
+router.post('/create', upload.fields([{ name: 'image', maxCount: 1 }]), createProduct)
 router.get('/getAll', getAllProducts)
 router.put('/:productId', updateProduct)
 router.delete('/:productId', removeProduct)

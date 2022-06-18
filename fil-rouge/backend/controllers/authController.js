@@ -2,46 +2,30 @@ require('dotenv').config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Users = require('../models/users');
-const {registerValidation,loginValidation} = require("../validation/validation")
+const {loginValidation} = require("../validation/validation")
+const expressAsyncHandler = require('express-async-handler');
 
 
-
-//HandlRegister///////////////////////////////////////////////////
-const handleRegister = async (req,res) =>{
-
-//Validation Data
-const {error} = registerValidation(req.body);
-if(error) return res.status(400).send(error.details[0].message);
-
-//checking if the user is already in the database 
-const emailExist = await Users.findOne({email:req.body.email})
-if(emailExist) return res.status(400).send('Email already exists');
-
-//HASH paswords
-const salt = await bcrypt.genSalt(10);
-const hashedpassword = await bcrypt.hash(req.body.password, salt);
-
-// Create a new user
-  const user = new Users({
-    fullName: req.body.fullName,
-    email: req.body.email,
-    phone: req.body.phone,
-    adress: req.body.adress,
-    password: hashedpassword,
-    confirm_password: req.body.repaeat_password,
-    role: {name:req.body.role}
-  });
-  try{
-    const saveUser = await user.save();
-    res.send({ user: user._id});
-
-  }catch(err){
-    res.status(400).send(err)
-  }
-
-};
-
-
+const handleRegister = expressAsyncHandler(async (req, res) => {
+  //   console.log(req.body);
+  //Check if user already exists
+  const userExist = await Users.findOne({ email: req?.body?.email });
+  if(userExist) throw new Error('User already exists')
+      try {
+          const user = await Users.create({
+              fullName:req?.body?.fullName,
+              email:req?.body?.email,
+              phone:req?.body?.phone,
+              adress:req?.body?.adress,
+              password:req?.body?.password,
+              role: {name:req.body.role}
+          })
+          res.status(200).json(user);
+      } catch (error) {
+      res.json(error);
+      }
+      
+    })
 
 //HandlLogin//////////////////////////////////////////////////
 const handleLogin = async (req,res) =>{
@@ -67,6 +51,25 @@ res.status(200).json({
 });
   
 }
+
+// const handleLogin = expressAsyncHandler(async (req, res) => {
+//   const{email,password} = req.body;
+//   //Check if user already exists
+//   const user = await Users.findOne({ email });
+
+//   //check if passowrd is correct
+//   if(user && (await user.isPasswordMatched(password))){
+//       res.json({
+         
+//           email:user?.email,
+//           password:user?.password
+          
+//       })
+//   }else{
+//       res.status(404)
+//       throw new Error('Login failed');
+//   }
+// });
 
 const handleLogout = (req,res) =>{
   res.send('logout')

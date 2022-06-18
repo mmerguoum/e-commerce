@@ -1,6 +1,6 @@
 const express = require('express')
 const { showOneUser, getAllUser, updateUser, removeUser, searchUser, createUser } = require('../controllers/userController')
-
+// const isAdmin = require('../middleware/auth')
 
 const   router = express.Router()
 router.get('/getUser', getAllUser)

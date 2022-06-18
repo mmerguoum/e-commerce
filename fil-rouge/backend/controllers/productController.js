@@ -65,12 +65,20 @@ exports.productSearch = async(req, res)=>{
     {
         "$or":[
             {name:{$regex:req.params.key.toLowerCase()}},
+            {category:{$regex:req.params.key.toLowerCase()}},
         ]
       }
 )
+try{
+         res.send(data) 
   
-    res.send(data)
+     }catch{
+       res.status(400).send({message:'Opps No product found!!'})
+     }
+ 
 }
+
+
 
 exports.updateProduct = async(req, res) =>{
   try {
@@ -88,20 +96,19 @@ exports.updateProduct = async(req, res) =>{
 }
 
 
+// exports.filtering = () => {
+//     const queryObj = {...this.queryString} //queryString = req.query
 
-  // exports.productSearch = async(req,res)=>{
-  //   let regEx = new RegExp(req.query.name,'i');
-  //  const searchedProducts = await Product.find(
-  //   {
-  //     "$or":[
-  //         {name:{$regex:req.params.key}},
-  //     ]
-  //   }
-  // )
-  //  if(searchedProducts){
-  //      res.send(searchedProducts)
+//     const excludedFields = ['page', 'sort', 'limit']
+//     excludedFields.forEach(el => delete(queryObj[el]))
+    
+//     let queryStr = JSON.stringify(queryObj)
+//     queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
 
-  //  }else{
-  //    res.status(402).send({message:'Opps No product found!!'})
-  //  }
-  // }
+//     this.query.find(JSON.parse(queryStr))
+      
+//     return this;
+//  }
+
+
+ 

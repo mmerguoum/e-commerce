@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(cors());
+// app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload({
   useTempFiles: true,
@@ -48,14 +49,6 @@ app.use('/api/category', categoryRoute)
 app.use('/api/users', userRoute)
 app.use('/api/product', productRoute)
 app.use('/api',upload)
-
-
-// app.get('/api/config/paypal', (req, res) =>
-//   res.send(process.env.PAYPAL_CLIENT_ID)
-// )
-
-
-
 
 
 const PORT = process.env.PORT || 5000

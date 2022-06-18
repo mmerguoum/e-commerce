@@ -1,28 +1,31 @@
-const JWT = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-exports.isAuth = (req, res, next) => {
+exports.isLogin = (req, res, next) => { // check if token valid
+    var token = req.header('Authorization')
 
-    let user = req.profile && req.auth && (req.profile._id == req.auth._id)
-
-    if(!user) {
-        return res.status(403).json({
-            error: "Access Denied"
-        })
+    try {
+        req.user = jwt.verify(token, SCRT_TOKEN)
+        next()
+    } catch (error) {
+        res.status('401').json({ message: 'You are not Authorized' })
     }
-
-    next()
 }
+
+
 
 
 exports.isAdmin = (req, res, next) => {
 
-    if(req.auth.role == 0) {
-        return res.status(403).json({
-            error: "Admin Resource, Access Denied !"
+    if(req.auth.role == admin) {
+        if(req.user.admin){
+            next();
+        }else{
+            return res.status(403).json({
+                error: "Admin Resource, Access Denied !"
         })
+    
+        }
     }
-
-    next();
 
 }
