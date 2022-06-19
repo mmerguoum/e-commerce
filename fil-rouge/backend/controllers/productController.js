@@ -1,28 +1,33 @@
 const Product = require('../models/products')
-const fs = require('fs')
+const shortid = require('shortid')
 
 
-exports.createProduct = async (req, res) => {
-  
-  let data = req.body;
-
-  const name = data.name
-  const description = data.description
-  const price = data.price
-  const image = data.image
-  const category = data.category
-  const quantity = data.quantity
-
-  Product.create({
-      name: name, description: description, price: price, image: image, category: category, quantity: quantity
-  })
-      .then((product) => {
-
-          res.json(product)
+exports.createProduct = (req, res) => {
+  // res.status(200).json( { file: req.file, body: req.body } );
+    const { name, price, description, category, quantity} = req.body;
+   let productPictures = [];
+  if(req.files.length > 0){
+     productPictures = req.files.map(file => {
+        return { img: file.filename}
       })
-      .catch((err) => {
-          res.send({ status: 400, message: err });
-      });
+  }
+  const product = new Product({
+    name,
+    price,
+    description,
+    category,
+    quantity,
+    productPictures
+    
+ 
+  })
+  
+  product.save((error, product) => {
+    if(error) return res.status(400).json({ error })
+    if(product){
+      res.status(200).json({product})
+    }
+  })
 };
 
 

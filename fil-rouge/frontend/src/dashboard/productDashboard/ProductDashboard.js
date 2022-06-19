@@ -66,9 +66,9 @@ console.log(products)
                         <th scope="col" className="px-6 py-3">
                         Product name
                         </th>
-                        {/* <th scope="col" className="px-6 py-3">
-                        image
-                        </th> */}
+                        <th scope="col" className="px-6 py-3">
+                        productPictures
+                        </th>
                         <th scope="col" className="px-6 py-3">
                         Category
                         </th>

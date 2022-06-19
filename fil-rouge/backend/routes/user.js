@@ -1,9 +1,9 @@
 const express = require('express')
 const { showOneUser, getAllUser, updateUser, removeUser, searchUser, createUser } = require('../controllers/userController')
-// const isAdmin = require('../middleware/auth')
+// const { requireSignin } = require("../middleware/auth")
 
 const   router = express.Router()
-router.get('/getUser', getAllUser)
+router.get('/getUser',  getAllUser)
 router.post('/create', createUser) 
 router.put('/:userId', updateUser)
 router.get('/:userId', showOneUser)

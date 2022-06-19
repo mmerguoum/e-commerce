@@ -20,10 +20,10 @@ const productSchema = new mongoose.Schema({
     quantity: {
         type: Number
     },
-    image: {
-        type: Object,
-        // require: true
-    },
+    productPictures:  [ { 
+        img: { type: String } 
+    }] 
+   ,
     category: {
         type: String,
         require: true
@@ -38,6 +38,7 @@ const productSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Product', productSchema);
+
 
 
 

@@ -1,4 +1,7 @@
 const express = require('express')
+const multer = require('multer') 
+const shortid = require("shortid");
+const path = require('path')
 const {
     createProduct,
     showOneProduct, 
@@ -6,14 +9,23 @@ const {
     updateProduct, 
     getAllProducts,
     productSearch } = require('../controllers/productController') 
-    const multer = require('multer')
-    const upload = multer();
-    
-
 
 const router = express.Router()
-// ,Upload.single('image')
-router.post('/create', upload.fields([{ name: 'image', maxCount: 1 }]), createProduct)
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null,path.join(path.dirname(__dirname), 'uploads') );
+    },
+    filename: function (req, file, cb) {
+      cb(null, shortid.generate() + '-' + file.originalname);
+    },
+  });
+  
+  const upload = multer({ storage });
+
+  
+router.post('/create', upload.array("productPictures"), createProduct)
 router.get('/getAll', getAllProducts)
 router.put('/:productId', updateProduct)
 router.delete('/:productId', removeProduct)
@@ -21,7 +33,7 @@ router.get('/:productId', showOneProduct)
 router.get('/search/:key', productSearch)
 // router.put('/:productIduserId', putProduct)
 
-
+ 
 
 
 module.exports = router 

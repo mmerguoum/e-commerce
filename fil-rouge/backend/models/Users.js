@@ -1,18 +1,10 @@
 const mongoose  = require("mongoose");
+const bcryptjs = require('bcryptjs')
 // console.log(mongoose.isValidObjectId())
 
 
-//create Role schema
-const RoleSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    enum: ["admin", "user"],
-    default: "user"
-  }
-})
-
 // create Users schema
-const userschema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 
   fullName:{
     type: String,
@@ -23,8 +15,11 @@ const userschema = new mongoose.Schema({
   email:{
     type: String,
     required: true,
+    trim: true,
     min: 6,
-    max:255
+    max:255,
+    unique: true,
+    lowercase: true
   },
   phone:{
     type:Number,
@@ -34,7 +29,7 @@ const userschema = new mongoose.Schema({
     type:String,
     required: false
   },
-  password: {
+  hash_password: {
     type: String,
     required: true,
     max:1024,
@@ -44,7 +39,11 @@ const userschema = new mongoose.Schema({
     type: Array,
     default: [] 
   },
-  role: RoleSchema
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user"
+  }
 
 }, {
   timestamps: true
@@ -52,4 +51,15 @@ const userschema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('User', userschema);
+userSchema.virtual('password')
+.set(function(password){
+  this.hash_password = bcryptjs.hashSync(password, 10);
+})
+
+userSchema.methods = {
+  authenticate: function(password){
+    return bcryptjs.compareSync(password, this.hash_password)
+  }
+}
+
+module.exports = mongoose.model('User', userSchema);
