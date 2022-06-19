@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Path } from 'react-router-dom'
 
 const RowProduct = ({id, name, price, quantity, description, category, handleDelete, productPictures}) => {
-
+console.log('hojjdhh',productPictures[0].img)
   return (
     <>
         <tbody>
@@ -17,7 +18,7 @@ const RowProduct = ({id, name, price, quantity, description, category, handleDel
                <td className="pl-4 cursor-pointer">
                    <div className="flex items-center">
                        <div className="pl-4">
-                           {productPictures}
+                        <img src={`http://localhost:2000/uploads/${productPictures[0].img}`} />
                        </div>
                    </div>
                </td>
