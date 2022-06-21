@@ -14,6 +14,8 @@ import UpdateProducts from './dashboard/productDashboard/UpdateProducts';
 import UpdateUser from './dashboard/userDashboard/UpdateUser';
 import AddProduct from './dashboard/productDashboard/AddProduct';
 import AddCategory from './dashboard/categoryDashboard/AddCategory';
+import ProductItems from './pages/products/ProductItems'
+
 
 
 const App = () => {
@@ -36,6 +38,8 @@ const App = () => {
           <Route path='UpdateProducts/:id' element={<UpdateProducts/>}/>
           <Route path='AddProduct' element={<AddProduct/>}/>
           <Route path='AddCategory' element={<AddCategory/>}/>
+          <Route path='ProductItems/:id' element={<ProductItems/>}/>
+
         </Routes>
       </Router>
   </>

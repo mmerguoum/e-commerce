@@ -9,7 +9,7 @@ const UpdateProducts = () => {
     const {id} = useParams();
     const [values, setValues] = useState({
       name: "",
-    //   image: "",
+      // productPictures: "",
       category: "",
       price: "",
       quantity:"",
@@ -33,11 +33,11 @@ const UpdateProducts = () => {
                await getProductById(id).then((product) => {
                  setProduct(product)
                  setValues({...values, name: product.data.name, category: product.data.category ,price: product.data.price, quantity: product.data.quantity, description: product.data.description})
+                //  , productPictures: product.data.productPictures
                });
              })();
            }, []);
 
-    const [errors, setErrors] = useState({});
 
  const [submitted, setSubmitted] = useState(false);
 
@@ -48,6 +48,11 @@ const UpdateProducts = () => {
  const handleCategory = (e) => {
   setValues({ ...values, category: e.target.value });
 };
+
+// const handleImage = (e) => {
+//   console.log(e.target.file)
+//   setValues({ ...values, productPictures: e.target.value });
+// };
 
  const handlePrice= (e) => {
    setValues({ ...values, price: e.target.value });
@@ -61,9 +66,6 @@ const UpdateProducts = () => {
     setValues({ ...values, description: e.target.value });
   };
 
-  const handleErrors = (errors) => {
-    setErrors({ ...errors });
-  };
 
   const getUpdatedValues = (values) => {
     let res = {};
@@ -80,7 +82,7 @@ const handleSubmit = async (e) => {
     getUpdatedValues(values);
     console.log(getUpdatedValues(values))
     await updateProduct(id, getUpdatedValues(values))
-    navigate("/ProductsDashboard")
+    navigate("/ProductDashboard")
     setSubmitted(true);
    };
   
@@ -98,7 +100,7 @@ const handleSubmit = async (e) => {
         onSubmit={handleSubmit}>
         <div className="mb-3">
             <label
-            for="name"
+            htmlFor="name"
             className="mb-3 block text-base font-medium text-yellow-900"
             >
             Name Product
@@ -113,9 +115,26 @@ const handleSubmit = async (e) => {
             className="w-full h-10 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-sm text-gray-600 outline-none focus:border-yellow-400 focus:shadow-md"
             />
         </div>
+        {/* <div className="mb-3">
+            <label
+            htmlFor="name"
+            className="mb-3 block text-base font-medium text-yellow-900"
+            >
+            Image
+            </label>
+            <input
+            type="file"
+            name="image"
+            id="image"
+            value={values.productPictures}
+            onChange={handleImage}
+            placeholder="Full Name"
+            className="w-full h-14 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-sm text-gray-600 outline-none focus:border-yellow-400 focus:shadow-md"
+            />
+        </div> */}
         <div className="mb-3">
             <label
-            for="price"
+            htmlFor="price"
             className="mb-3 block text-base font-medium text-yellow-900"
             >
             Price
@@ -132,7 +151,7 @@ const handleSubmit = async (e) => {
         </div>
         <div className="mb-3">
             <label
-            for="subject"
+            htmlFor="subject"
             className="mb-3 block text-base font-medium text-yellow-900"
             >
             Category
@@ -149,7 +168,7 @@ const handleSubmit = async (e) => {
         </div>
         <div className="mb-3">
             <label
-            for="subject"
+            htmlFor="subject"
             className="mb-3 block text-base font-medium text-yellow-900"
             >
             quantity

@@ -87,14 +87,17 @@ try{
 
 exports.updateProduct = async(req, res) =>{
   try {
-      const {name, price, description, quantity, image, category} = req.body;
-      if(!image) return res.status(400).json({msg: "No image upload"})
+      const {name, price, description, quantity, category} = req.body;
+      // if(!image) return res.status(400).json({msg: "No image upload"})
 
-      await Product.findOneAndUpdate({_id: req.params.productId}, {
-          name, price, description, quantity, image, category
+     const product = await Product.findByIdAndUpdate({_id: req.params.id}, {
+          name, price, description, quantity, category
+      },{new:true})
+      // , productPictures
+      res.json({
+        msg: "Updated a Product",
+        product: product
       })
-
-      res.json({msg: "Updated a Product"})
   } catch (err) {
       return res.status(500).json({msg: err.message})
   }

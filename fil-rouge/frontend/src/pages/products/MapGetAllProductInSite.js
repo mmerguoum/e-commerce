@@ -1,9 +1,9 @@
 import React from 'react'
-import Products from './Products'
+import OneProduct from './OneProduct'
 
-const MapGetAllProductInSite = ({getAllProduct, handleDelete,handleId}) => {
+const MapGetAllProductInSite = ({getAllProduct}) => {
     const product = getAllProduct.map(({_id, ...otherProps}) => (
-       <Products key={_id} {...otherProps} id={_id} handleId={handleId} handleDelete={handleDelete}/> 
+       <OneProduct key={_id} {...otherProps} id={_id}/> 
     ))
     return (
     <React.Fragment>

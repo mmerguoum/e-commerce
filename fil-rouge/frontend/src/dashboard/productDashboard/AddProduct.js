@@ -11,21 +11,14 @@ const AddProduct = () => {
     const [category, setCategory] = useState("")
     const [description, setDescription] = useState("")
     const [quantity, setQuantity] = useState("")
-    const [productPictures, setProductPictures] = useState("")
-
-    
-    const submitHundler = (e) => {
-        e.preventDefault()
-        console.log(e)
-        navigate('/ProductDashboard')
-    }
-   
+    const [productPictures, setProductPictures] = useState([])
 
     const handleName = (e) => {
         return setName(e.target.value)
     }
-    const handleImage = (e) => {
-        return setProductPictures(e.target.file)
+    const handleProductPictures = (e) => {
+        // console.log(e.target.files[0])
+        return setProductPictures(e.target.files[0])
     }
     const handlePrice = (e) => {
         return setPrice(e.target.value)
@@ -44,24 +37,30 @@ const AddProduct = () => {
 
     const API_URL = 'http://localhost:2000/api/product/create'
 
-    const addProduct = async () => {
+    const addProduct = async (e) => {
+        e.preventDefault()
+        navigate('/ProductDashboard')
         const data = new FormData()
+        
         data.append("name",name)
         data.append("price",price)
         data.append("description",description)
         data.append("quantity",quantity)
         data.append("category",category)
-        data.append("ProductPictures",productPictures)
+        data.append("productPictures",productPictures)
 
        try {
-          const result = axios.post(API_URL , data).data
+          const result = axios.post(API_URL , data)
           return result
+          
+          
        } catch (error) {
          console.log(error)
        }
+       
      }
     
-
+     
      return (
         <>
         <AdminDashboard/>
@@ -71,11 +70,11 @@ const AddProduct = () => {
             <form  
             className="w-68 h-max" 
             method="POST"
-            onSubmit={submitHundler}>
+            >
     
             <div className="mb-3">
                 <label
-                for="name"
+                htmlFor="name"
                 className="mb-3 block text-base font-medium text-yellow-900"
                 >
                 Name
@@ -90,26 +89,26 @@ const AddProduct = () => {
                 className="w-full h-10 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-sm text-gray-600 outline-none focus:border-yellow-400 focus:shadow-md"
                 />
             </div>
-            <div className="mb-6">
+            <div className="mb-6 h-24">
                 <label
-                for="subject"
+                htmlFor="subject"
                 className="mb-3 block text-base font-medium text-yellow-900"
                 >
                 image
                 </label>
                 <input
                 type="file"
-                name="image"
+                name="productPictures"
                 id="image"
-                value={productPictures}
-                onChange={handleImage}
+                // value={productPictures}
+                onChange={handleProductPictures}
                 placeholder="Enter your subject"
-                className="w-full rounded-md h-10 border border-[#e0e0e0] bg-white py-3 px-6 text-base font-sm text-gray-600 outline-none focus:border-yellow-400 focus:shadow-md"
+                className="w-full rounded-md h-14 border border-[#e0e0e0] bg-white py-3 px-6 text-base font-sm text-gray-600 outline-none focus:border-yellow-400 focus:shadow-md"
                 />
             </div>
             <div className="mb-3">
                 <label
-                for="category"
+                htmlFor="category"
                 className="mb-3 block text-base font-medium text-yellow-900"
                 >
                 category
@@ -126,7 +125,7 @@ const AddProduct = () => {
             </div>
             <div className="mb-3">
                 <label
-                for="price"
+                htmlFor="price"
                 className="mb-3 block text-base font-medium text-yellow-900"
                 >
                 Price
@@ -143,7 +142,7 @@ const AddProduct = () => {
             </div>
             <div className="mb-6">
                 <label
-                for="subject"
+                htmlFor="subject"
                 className="mb-3 block text-base font-medium text-yellow-900"
                 >
                 quantity
@@ -160,7 +159,7 @@ const AddProduct = () => {
             </div>
             <div className="mb-3">
             <label
-            for="message"
+            htmlFor="message"
             className="mb-3 block text-base font-medium text-yellow-900"
             >
             Description
