@@ -46,17 +46,6 @@ console.log(products)
         <div className="flex justify-center w-full mt-6 lg:mb-0">
                 <h1 className="sm:text-4xl text-5xl font-medium font-bold title-font text-gray-900">Products</h1>
         </div>
-        {/* <div className="font-sans text-black bg-white flex items-center justify-end mr-8 mt-12 ">
-            <div className="border border-yellow-500 rounded flex hover:border-0">
-                <input type="text"
-                 className=" px-4 py-2" 
-                 placeholder="Search... "
-                 />
-                <button className="flex items-center justify-center px-4 ">
-                <svg className="h-4 w-4 text-yellow-700" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>
-                </button>
-            </div>
-        </div> */}
         <form className="flex justify-end items-center mr-8">   
             <label htmlFor="simple-search" className="sr-only">Search</label>
             <div className="relative w-56">

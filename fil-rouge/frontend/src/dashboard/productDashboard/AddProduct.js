@@ -17,7 +17,6 @@ const AddProduct = () => {
         return setName(e.target.value)
     }
     const handleProductPictures = (e) => {
-        // console.log(e.target.files[0])
         return setProductPictures(e.target.files[0])
     }
     const handlePrice = (e) => {

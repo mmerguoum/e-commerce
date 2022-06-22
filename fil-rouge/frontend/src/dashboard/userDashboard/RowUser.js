@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const RowUser = ({id, fullName, email, adress, phone, handleDelete}) => {
+const RowUser = ({id, fullName, email, adress, phone, role, handleDelete}) => {
   return (
     <>
         <tbody>
@@ -31,6 +31,13 @@ const RowUser = ({id, fullName, email, adress, phone, handleDelete}) => {
                    <div className="flex items-center">
                        <div className="pl-4">
                           {adress}        
+                       </div>
+                   </div>
+               </td>
+               <td className="pl-4 cursor-pointer">
+                   <div className="flex items-center">
+                       <div className="pl-4">
+                          {role}        
                        </div>
                    </div>
                </td>

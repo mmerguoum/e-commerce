@@ -50,8 +50,8 @@ const RowProduct = ({id, name, price, quantity, description, category, handleDel
                        </div>
                    </div>
                </td>
-              <td className="px-6 py-4 text-center flex justify-between">
-                    <Link to={`/UpdateProducts/${id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mt-4">Edit</Link>
+              <td className="px-6 py-4 text-center flex">
+                    <Link to={`/UpdateProducts/${id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mt-4 mr-8">Edit</Link>
                     <Link to={""} onClick={(e)=> { window.confirm( 'Are you sure you want to delete this Card?') && handleDelete(e,id) }} href="#" className="font-medium text-blue-600 dark:text-red-500 hover:underline mt-4">Delete</Link>
               </td>
             </tr>
