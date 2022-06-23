@@ -52,7 +52,7 @@ console.log(products)
   return (
     <Layout>
         <div className>
-        <div className="flex justify-center w-full mt-6 lg:mb-0">
+        <div className="flex justify-center w-full mt-6 h-screen lg:mb-0">
                 <h1 className="sm:text-4xl text-5xl font-lg font-extrabold title-font text-gray-700">Products</h1>
         </div>
         <form className="flex justify-end items-center mr-8">   

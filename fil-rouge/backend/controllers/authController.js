@@ -56,21 +56,15 @@ const handleLogin = async (req,res) =>{
     if (error) return res.status(400).json({ error });
     if (user) {
       const isPassword = await user.authenticate(req.body.password);
-      if (isPassword && user.role === "user") {
+      if (isPassword && (user.role === "user" || user.role === "admin")) {
         const token = jwt.sign(
           { _id: user._id, role: user.role },
           process.env.TOKEN_SECRET,
           { expiresIn: "1d" });
-        res.cookie('token', token, {httpOnly: true});
+        res.cookie("token", token, {httpOnly: true});
         res.json({token});
-      }else if(isPassword && user.role === "admin"){
-        const token = jwt.sign(
-          { _id: user._id, role: user.role },
-          process.env.TOKEN_SECRET,
-          { expiresIn: "1d" })
-        res.cookie('token', token, {httpOnly: true})
-        res.json({token})
-      } else {
+        console.log({token})
+      }else {
         return res.status(400).json({
           message: "Invalid Password",
         });

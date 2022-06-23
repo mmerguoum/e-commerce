@@ -29,7 +29,6 @@ const Header = () => {
       <article className="img-container">
         <img src={require('../../assets/tab3.jpg')} className="main-img"/>
         <img src={require('../../assets/tab4.jpg')} className="accent-img"/>
-        {/* <img className=" bg-orange rounded"/> */}
       </article>
     </Wrapper>
   )
