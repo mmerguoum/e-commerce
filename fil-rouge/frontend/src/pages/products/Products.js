@@ -9,14 +9,14 @@ import axios from 'axios'
 const Products = () => {
   const [products, setProduct] = useState([])
 
-// const handleSearch = async (e, key) => {
-//     console.log(key)
-//     await axios.delete(`http://localhost:2000/api/product/search/${key}`)
-//         .then(res => {
-//             const searchProduct = products.filter(e => e.name == key)
-//             setProduct(searchProduct)
-//         })
-// }
+const handleSearch = async (e, key) => {
+    console.log('tessssssssssssssst', key)
+    // await axios.delete(`http://localhost:2000/api/product/search/${key}`)
+    //     .then(res => {
+    //         const searchProduct = products.filter(e => e.name == key)
+    //         setProduct(searchProduct)
+        // })
+}
 
 const url = "http://localhost:2000/api/product/getAll"
 
@@ -34,6 +34,15 @@ const getAllProduct = () => {
 }
 
 
+// const productSearch = async (e, key) => {
+    
+//     try{
+//         await axios.get(`http://localhost:2000/api/product/search/${key}`)
+//     }catch(error){
+//         console.log(error)
+//     }
+// }
+
 const [id, setId] = useState()
 
 const handleId = (e, selectionId) => {
@@ -44,12 +53,12 @@ console.log(products)
     <Layout>
         <div className>
         <div className="flex justify-center w-full mt-6 lg:mb-0">
-                <h1 className="sm:text-4xl text-5xl font-medium font-bold title-font text-gray-900">Products</h1>
+                <h1 className="sm:text-4xl text-5xl font-lg font-extrabold title-font text-gray-700">Products</h1>
         </div>
         <form className="flex justify-end items-center mr-8">   
-            <label htmlFor="simple-search" className="sr-only">Search</label>
+            <label htmlFor="simple-search" onClick={handleSearch} className="sr-only">Search</label>
             <div className="relative w-56">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none" >
                     <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                 </div>
                 <input type="text" id="simple-search" className="bg-white border border-yellow-700 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full pl-10 p-2.5  dark:bg-white dark:border-yellow-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required/>

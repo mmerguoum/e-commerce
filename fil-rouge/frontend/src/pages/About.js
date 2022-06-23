@@ -12,10 +12,10 @@ const About = () => {
     <div className="bg-my-color text-white w-full h-screen flex justify-center items-center px-3 text-center">
       <div className="px-8 text-gray-100 lg:text-lg overflow-hidden	">
         
-        <p className="lg:text-md font-bold h-full text-black mb-8 font-sans">
+        <p className="lg:text-md font-bold h-full text-black mb-12 font-bold text-3xl text-gray-700">
             Fatima zahra sadki
         </p>
-        <p className="md:mb-10 mb-5 lg:text-md text-sm text-black ">
+        <p className="md:mb-10 mb-5 lg:text-md text-sm text-black text-gray-700">
         
            Artiste peintre marocaine née en 1986. l'artiste découvre la peinture dès son enfance grace à son père qui lui encourage d'aller loin dans ces passions et ces réalisations de la peinture abstraite .
            Elle réalise des oeuvres contemporaines avec un style abstrait exceptionnel et spontanée afin exprimer ses émotions sur la toile, tout en laissant une belle impression chez le spectateur pleins de vie, d'évasion et  d'imagination. 

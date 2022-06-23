@@ -8,11 +8,12 @@ const Header = () => {
   return (
     <Wrapper className="section-center">
       <article className="content inline-block ">
-              <h1>
+              <h1 className="text-gray-800">
                 Get your taste of <br />
                 Artshop
               </h1>
-              <p>
+              <div className="text-gray-600">
+              <p >
                 lorem ipsum
                 lorem ipsum
                 lorem ipsum
@@ -20,6 +21,7 @@ const Header = () => {
                 lorem ipsumlorem ipsumlorem ipsum
                 lorem ipsumlorem ipsumlorem ipsumlorem ipsum
               </p>
+              </div>
               <button type="submit" className=" px-6 py-2 border-2 border-yellow-500 text-black font-medium text-xs leading-tight uppercase rounded hover:bg-yellow-700 hover:text-white  focus:outline-none focus:ring-0 transition duration-150 ease-in-out ml-28">
               <Link to="/products">Shop Now</Link>                    
               </button>

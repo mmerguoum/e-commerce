@@ -49,9 +49,10 @@ const Login = () => {
             await dispatch(setRoleAction(jwtDecode(response.data.token).role))
             await dispatch(setIdAction(jwtDecode(response.data.token)._id))
         })()
+        setSubmit(true);
+        navigate('/') 
       })
-      setSubmit(true);
-    navigate('/') 
+     
     }
 
 

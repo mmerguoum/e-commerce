@@ -17,7 +17,7 @@ const Home = () => {
             <h2 className="text-base font-bold text-yellow-600">
                 We have the best equipment in the market
             </h2>
-            <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-black">
+            <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-gray-800">
                 Check our awesome team membwhite            
             </h1>
         </div>
@@ -119,14 +119,14 @@ const Home = () => {
 <div className="py-20 bg-gray-50">
     <div className="container mx-auto px-6 md:px-12 xl:px-32">
         <div className="mb-16 text-center">
-            <h2 className="mb-4 text-center text-2xl text-gray-900 font-bold md:text-4xl">Join us and get some tips</h2>
+            <h2 className="mb-4 text-center text-2xl text-gray-800 font-bold md:text-4xl">Join us and get some tips</h2>
             <p className="text-gray-600 lg:w-8/12 lg:mx-auto">Tailus prides itself not only on award-winning technology, but also on the talent of its people of some of the brightest minds and most experienced executives in business.</p>
         </div>
         <div>
       <form action="">
         <div className="grid md:grid-cols-3 gird-cols-1 gap-4 flex justify-center items-center pt-12">
           <div className="md:ml-auto md:mb-6">
-            <p className="">
+            <p className="text-gray-800">
               <strong>Sign up for our newsletter</strong>
             </p>
           </div>
