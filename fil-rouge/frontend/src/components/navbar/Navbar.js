@@ -2,10 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
    const role = useSelector(state=>state.role)
    const auth = useSelector(state=>state.authenticated)
    const state = useSelector(state=>state)
