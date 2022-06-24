@@ -33,7 +33,7 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
 
-app.use(cors({credentials: true, origin: true}));
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 
 // app.use(fileUpload({

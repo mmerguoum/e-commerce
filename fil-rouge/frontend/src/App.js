@@ -15,20 +15,23 @@ import UpdateUser from './dashboard/userDashboard/UpdateUser';
 import AddProduct from './dashboard/productDashboard/AddProduct';
 import AddCategory from './dashboard/categoryDashboard/AddCategory';
 import ProductItems from './pages/products/ProductItems'
-
+import NotFound from './components/notFound/NotFound';
+import { useSelector } from 'react-redux';
 
 
 const App = () => {
+  const auth = useSelector(state=>state.authenticated)
+
 
   return (
   <>
       <Router>
         <Routes>           
           <Route path='/' element={<Home/>}/>
-          <Route path='Products' element={<Products/>}/>
+          <Route path='Products' element={auth?<Products/>:<NotFound/>}/>
           <Route path='About' element={<About/>}/>
           <Route path='Login' element={<Login/>}/>
-          <Route path='Cart' element={<Cart/>}/>
+          <Route path='Cart' element={auth?<Cart/>:<NotFound/>}/>
           <Route path='Signup' element={<Signup/>}/>
           <Route path='AdminDashboard' element={<AdminDashboard/>}/>
           <Route path='UsersDashboard' element={<UsersDashboard/>}/>
@@ -38,7 +41,8 @@ const App = () => {
           <Route path='UpdateProducts/:id' element={<UpdateProducts/>}/>
           <Route path='AddProduct' element={<AddProduct/>}/>
           <Route path='AddCategory' element={<AddCategory/>}/>
-          <Route path='ProductItems/:id' element={<ProductItems/>}/>
+          <Route path='ProductItems/:id' element={auth?<ProductItems/>:<NotFound/>}/>
+          <Route path='NotFound' element={<NotFound/>}/>
 
         </Routes>
       </Router>

@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../../layout/Layout'
 import MapGetAllProductInSite from './MapGetAllProductInSite';
 import axios from 'axios'
-// import Sidebar from '../../components/sidebar/Sidebar';
+
 
 
 
 const Products = () => {
   const [products, setProduct] = useState([])
 
-const handleSearch = async (e, key) => {
-    console.log('tessssssssssssssst', key)
+// const handleSearch = async (e, key) => {
+//     console.log('tessssssssssssssst', key)
     // await axios.delete(`http://localhost:2000/api/product/search/${key}`)
     //     .then(res => {
     //         const searchProduct = products.filter(e => e.name == key)
     //         setProduct(searchProduct)
         // })
-}
+// }
 
 const url = "http://localhost:2000/api/product/getAll"
 
@@ -34,14 +34,14 @@ const getAllProduct = () => {
 }
 
 
-// const productSearch = async (e, key) => {
+const handleSearch = async (e, key) => {
     
-//     try{
-//         await axios.get(`http://localhost:2000/api/product/search/${key}`)
-//     }catch(error){
-//         console.log(error)
-//     }
-// }
+    try{
+        await axios.get(`http://localhost:2000/api/product/search/${key}`)
+    }catch(error){
+        console.log(error)
+    }
+}
 
 const [id, setId] = useState()
 
@@ -52,7 +52,7 @@ console.log(products)
   return (
     <Layout>
         <div className>
-        <div className="flex justify-center w-full mt-6 h-screen lg:mb-0">
+        <div className="flex justify-center w-full mt-6 h-full lg:mb-0">
                 <h1 className="sm:text-4xl text-5xl font-lg font-extrabold title-font text-gray-700">Products</h1>
         </div>
         <form className="flex justify-end items-center mr-8">   

@@ -2,11 +2,6 @@ require('dotenv').config();
 const jwt = require("jsonwebtoken");
 const Users = require('../models/users');
 
-const generateJwtToken = (_id, role) => {
-  return jwt.sign({ _id, role }, process.env.TOKEN_SECRET, {
-    expiresIn: "1d",
-  });
-};
 
 const handleRegister = async (req, res) => {
   Users.findOne({email: req.body.email})
@@ -60,7 +55,7 @@ const handleLogin = async (req,res) =>{
         const token = jwt.sign(
           { _id: user._id, role: user.role },
           process.env.TOKEN_SECRET,
-          { expiresIn: "1d" });
+          { expiresIn: "1h" });
         res.cookie("token", token, {httpOnly: true});
         res.json({token});
         console.log({token})

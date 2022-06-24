@@ -10,9 +10,7 @@ const {
     getAllProducts,
     productSearch } = require('../controllers/productController') 
 
-    const { requireSignin,
-            userMiddleware,
-            isAdmin } = require('../middleware/auth')
+  
 
 const router = express.Router()
 
@@ -29,12 +27,12 @@ const storage = multer.diskStorage({
   const upload = multer({ storage });
 
   
-router.post('/create', requireSignin, isAdmin, upload.array("productPictures"), createProduct)
-router.get('/getAll',requireSignin,getAllProducts)
-router.put('/:id', requireSignin, isAdmin, updateProduct)
-router.delete('/:productId', requireSignin, isAdmin, removeProduct)
-router.get('/:productId', requireSignin, userMiddleware, showOneProduct) 
-router.get('/search/:key', requireSignin, userMiddleware, productSearch)
+router.post('/create', upload.array("productPictures"), createProduct)
+router.get('/getAll',getAllProducts)
+router.put('/:id', updateProduct)
+router.delete('/:productId', removeProduct)
+router.get('/:productId', showOneProduct) 
+router.get('/search/:key', productSearch)
 
 
 

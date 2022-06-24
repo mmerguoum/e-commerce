@@ -32,8 +32,8 @@ const UpdateProducts = () => {
              (async () => {
                await getProductById(id).then((product) => {
                  setProduct(product)
-                 setValues({...values, name: product.data.name, category: product.data.category ,price: product.data.price, quantity: product.data.quantity, description: product.data.description})
-                //  , productPictures: product.data.productPictures
+                 setValues({...values, name: product.data.name, category: product.data.category ,price: product.data.price, quantity: product.data.quantity, description: product.data.description, productPictures: product.data.productPictures})
+                
                });
              })();
            }, []);
@@ -51,7 +51,7 @@ const UpdateProducts = () => {
 
 // const handleImage = (e) => {
 //   console.log(e.target.file)
-//   setValues({ ...values, productPictures: e.target.value });
+//   setValues({ ...values, productPictures: e.target.files[0] });
 // };
 
  const handlePrice= (e) => {
@@ -124,7 +124,7 @@ const handleSubmit = async (e) => {
             </label>
             <input
             type="file"
-            name="image"
+            name="productPictures"
             id="image"
             value={values.productPictures}
             onChange={handleImage}

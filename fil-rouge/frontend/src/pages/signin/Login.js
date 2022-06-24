@@ -35,10 +35,8 @@ const Login = () => {
         return axios.post(API_URL, {
           email: email,
           password: password,
-        },{
-          withCredentials: true,
-          credentials: 'include',
-        });
+        })
+        localStorage.setItem('firstLogin',true)
       }
 
     const handleSubmit = (e) => {
